@@ -1,0 +1,18 @@
+﻿@model List<BestMovies.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+@if (Model.Count == 0)
+{
+    <div>We don't have any customers yet.</div>
+}
+else
+{
+    foreach (var customer in Model)
+    {
+        <div>@Html.ActionLink(customer.FirstName + " " + customer.LastName, "Details", new { id = customer.Id })</div>
+    }
+}
