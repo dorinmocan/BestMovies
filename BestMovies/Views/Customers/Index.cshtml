@@ -5,14 +5,29 @@
 }
 
 <h2>Customers</h2>
-@if (Model.Count == 0)
-{
-    <div>We don't have any customers yet.</div>
-}
-else
-{
-    foreach (var customer in Model)
+<table width = "500" border="0">
+    @if (Model.Count == 0)
     {
-        <div>@Html.ActionLink(customer.FirstName + " " + customer.LastName, "Details", new { id = customer.Id })</div>
+        <div>We don't have any customers yet.</div>
     }
-}
+    else
+    {
+        <thead>
+            <tr>
+                <td><b>Customer</b></td>
+                <td><b>Membership Type</b></td>
+            </tr>
+        </thead>
+        foreach (var customer in Model)
+        {
+        <tr>
+            <td>
+                @Html.ActionLink(customer.FirstName + " " + customer.LastName, "Details", new { id = customer.Id })
+            </td>
+            <td>
+                @customer.MembershipType.Name
+            </td>
+        </tr>
+        }
+    }
+</table>

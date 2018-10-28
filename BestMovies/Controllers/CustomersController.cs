@@ -1,4 +1,5 @@
-﻿using BestMovies.Models;
+﻿using BestMovies.DB;
+using BestMovies.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,19 @@ namespace BestMovies.Controllers
 {
     public class CustomersController : Controller
     {
-        private List<Customer> _customers = new List<Customer>()
-        {
-            new Customer(){ Id = 1, FirstName = "Brad", LastName = "Pitt"},
-            new Customer(){ Id = 2, FirstName = "Angelina", LastName = "Jolie"}
-        };
+        private BestMoviesDBContext _bestMoviesDBContext = new BestMoviesDBContext();
 
         // GET: Customers
         public ActionResult Index()
         {
-            return View(_customers);
+            var customers = _bestMoviesDBContext.Customers.ToList();
+            return View(customers);
         }
 
         // GET: Customers/Details/5
         public ActionResult Details(int id)
         {
-            var customer = _customers.FirstOrDefault(c => c.Id == id);
+            var customer = _bestMoviesDBContext.Customers.FirstOrDefault(c => c.Id == id);
             if (customer == null)
             {
                 return HttpNotFound();

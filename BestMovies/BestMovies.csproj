@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -150,10 +156,58 @@
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DB\BestMoviesDBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810281742320_CreateSchema.cs" />
+    <Compile Include="Migrations\201810281742320_CreateSchema.Designer.cs">
+      <DependentUpon>201810281742320_CreateSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810281749325_Add membership types.cs" />
+    <Compile Include="Migrations\201810281749325_Add membership types.Designer.cs">
+      <DependentUpon>201810281749325_Add membership types.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810281814068_Add customers.cs" />
+    <Compile Include="Migrations\201810281814068_Add customers.Designer.cs">
+      <DependentUpon>201810281814068_Add customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810281837281_Add movies.cs" />
+    <Compile Include="Migrations\201810281837281_Add movies.Designer.cs">
+      <DependentUpon>201810281837281_Add movies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810281907029_Add birthday to customer.cs" />
+    <Compile Include="Migrations\201810281907029_Add birthday to customer.Designer.cs">
+      <DependentUpon>201810281907029_Add birthday to customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810281909086_Add birthday to Brad Pitt.cs" />
+    <Compile Include="Migrations\201810281909086_Add birthday to Brad Pitt.Designer.cs">
+      <DependentUpon>201810281909086_Add birthday to Brad Pitt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810281930078_Set birthday field as nullable.cs" />
+    <Compile Include="Migrations\201810281930078_Set birthday field as nullable.Designer.cs">
+      <DependentUpon>201810281930078_Set birthday field as nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810282012589_Added genre and other fields to movie.cs" />
+    <Compile Include="Migrations\201810282012589_Added genre and other fields to movie.Designer.cs">
+      <DependentUpon>201810282012589_Added genre and other fields to movie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810282016111_Add genres.cs" />
+    <Compile Include="Migrations\201810282016111_Add genres.Designer.cs">
+      <DependentUpon>201810282016111_Add genres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810282035437_Fill movies with new data.cs" />
+    <Compile Include="Migrations\201810282035437_Fill movies with new data.Designer.cs">
+      <DependentUpon>201810282035437_Fill movies with new data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810282104038_Set fields of movie as required.cs" />
+    <Compile Include="Migrations\201810282104038_Set fields of movie as required.Designer.cs">
+      <DependentUpon>201810282104038_Set fields of movie as required.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,6 +270,41 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810281742320_CreateSchema.resx">
+      <DependentUpon>201810281742320_CreateSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281749325_Add membership types.resx">
+      <DependentUpon>201810281749325_Add membership types.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281814068_Add customers.resx">
+      <DependentUpon>201810281814068_Add customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281837281_Add movies.resx">
+      <DependentUpon>201810281837281_Add movies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281907029_Add birthday to customer.resx">
+      <DependentUpon>201810281907029_Add birthday to customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281909086_Add birthday to Brad Pitt.resx">
+      <DependentUpon>201810281909086_Add birthday to Brad Pitt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281930078_Set birthday field as nullable.resx">
+      <DependentUpon>201810281930078_Set birthday field as nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810282012589_Added genre and other fields to movie.resx">
+      <DependentUpon>201810282012589_Added genre and other fields to movie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810282016111_Add genres.resx">
+      <DependentUpon>201810282016111_Add genres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810282035437_Fill movies with new data.resx">
+      <DependentUpon>201810282035437_Fill movies with new data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810282104038_Set fields of movie as required.resx">
+      <DependentUpon>201810282104038_Set fields of movie as required.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

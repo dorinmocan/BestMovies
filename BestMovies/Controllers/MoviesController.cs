@@ -1,4 +1,5 @@
-﻿using BestMovies.Models;
+﻿using BestMovies.DB;
+using BestMovies.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,26 @@ namespace BestMovies.Controllers
 {
     public class MoviesController : Controller
     {
-        private List<Movie> _movies = new List<Movie>()
-        {
-            new Movie(){ Id = 1, Title = "Shrek!"},
-            new Movie(){ Id = 2, Title = "Mr. and Msr. Smith"}
-        };
+        private BestMoviesDBContext _bestMoviesDBContext = new BestMoviesDBContext();
 
         // GET: Movies
         public ActionResult Index()
         {
-            return View(_movies);
+            var movies = _bestMoviesDBContext.Movies.ToList();
+            return View(movies);
         }
 
         // GET: Movies/Details/5
         public ActionResult Details(int id)
         {
-            var movies = _movies.FirstOrDefault(m => m.Id == id);
-            if (movies == null)
+            var movie = _bestMoviesDBContext.Movies.FirstOrDefault(m => m.Id == id);
+            if (movie == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                return View(movies);
+                return View(movie);
             }
         }
 
