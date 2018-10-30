@@ -196,19 +196,16 @@
     <Compile Include="Migrations\201810282016111_Add genres.Designer.cs">
       <DependentUpon>201810282016111_Add genres.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810282035437_Fill movies with new data.cs" />
-    <Compile Include="Migrations\201810282035437_Fill movies with new data.Designer.cs">
-      <DependentUpon>201810282035437_Fill movies with new data.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810282104038_Set fields of movie as required.cs" />
-    <Compile Include="Migrations\201810282104038_Set fields of movie as required.Designer.cs">
-      <DependentUpon>201810282104038_Set fields of movie as required.cs</DependentUpon>
+    <Compile Include="Migrations\201810300030105_Set required fields for movie.cs" />
+    <Compile Include="Migrations\201810300030105_Set required fields for movie.Designer.cs">
+      <DependentUpon>201810300030105_Set required fields for movie.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieCreateEditModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +251,8 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\Create.cshtml" />
+    <Content Include="Views\Movies\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,11 +298,8 @@
     <EmbeddedResource Include="Migrations\201810282016111_Add genres.resx">
       <DependentUpon>201810282016111_Add genres.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810282035437_Fill movies with new data.resx">
-      <DependentUpon>201810282035437_Fill movies with new data.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810282104038_Set fields of movie as required.resx">
-      <DependentUpon>201810282104038_Set fields of movie as required.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810300030105_Set required fields for movie.resx">
+      <DependentUpon>201810300030105_Set required fields for movie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

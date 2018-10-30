@@ -7,13 +7,13 @@ namespace BestMovies.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Setfieldsofmovieasrequired : IMigrationMetadata
+    public sealed partial class Setrequiredfieldsformovie : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Setfieldsofmovieasrequired));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Setrequiredfieldsformovie));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810282104038_Set fields of movie as required"; }
+            get { return "201810300030105_Set required fields for movie"; }
         }
         
         string IMigrationMetadata.Source

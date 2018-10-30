@@ -3,7 +3,7 @@ namespace BestMovies.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Setfieldsofmovieasrequired : DbMigration
+    public partial class Setrequiredfieldsformovie : DbMigration
     {
         public override void Up()
         {
