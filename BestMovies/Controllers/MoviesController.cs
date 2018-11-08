@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace BestMovies.Controllers
 {
@@ -17,6 +18,7 @@ namespace BestMovies.Controllers
         public ActionResult Index()
         {
             var movies = _bestMoviesDBContext.Movies.ToList();
+
             return View(movies);
         }
 
@@ -24,6 +26,7 @@ namespace BestMovies.Controllers
         public ActionResult Details(int id)
         {
             var movie = _bestMoviesDBContext.Movies.FirstOrDefault(m => m.Id == id);
+
             if (movie == null)
             {
                 return HttpNotFound();
@@ -41,32 +44,40 @@ namespace BestMovies.Controllers
             {
                 Genres = _bestMoviesDBContext.Genres.Select(g => g.Name).ToList()
             };
+
             return View(movieCreationModel);
         }
 
         // POST: Customers/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(MovieCreateEditModel movieCreateModel)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
+                {
+                    movieCreateModel.Genres = _bestMoviesDBContext.Genres.Select(g => g.Name).ToList();
+
+                    return View(movieCreateModel);
+                }
+                else
                 {
                     var genre = _bestMoviesDBContext.Genres.FirstOrDefault(g => g.Name == movieCreateModel.Genre);
                     var movie = new Movie()
                     {
                         Title = movieCreateModel.Title,
                         Genre = genre,
-                        ReleaseDate = movieCreateModel.ReleaseDate,
+                        ReleaseDate = (DateTime)movieCreateModel.ReleaseDate,
                         AddedOn = DateTime.Now,
                         NumberInStock = movieCreateModel.NumberInStock
                     };
 
                     _bestMoviesDBContext.Movies.Add(movie);
                     _bestMoviesDBContext.SaveChanges();
-                }
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
@@ -80,35 +91,44 @@ namespace BestMovies.Controllers
             var movie = _bestMoviesDBContext.Movies.Find(id);
             var movieEditModel = new MovieCreateEditModel()
             {
+                Id = movie.Id,
                 Title = movie.Title,
                 Genre = movie.Genre.Name,
                 ReleaseDate = movie.ReleaseDate,
                 NumberInStock = movie.NumberInStock,
                 Genres = _bestMoviesDBContext.Genres.Where(g => g.Name != movie.Genre.Name).Select(g => g.Name).ToList()
             };
+
             return View(movieEditModel);
         }
 
         // POST: Customers/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, MovieCreateEditModel movieEditModel)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
+                {
+                    movieEditModel.Genres = _bestMoviesDBContext.Genres.Where(g => g.Name != movieEditModel.Genre).Select(g => g.Name).ToList();
+
+                    return View(movieEditModel);
+                }
+                else
                 {
                     var genre = _bestMoviesDBContext.Genres.FirstOrDefault(g => g.Name == movieEditModel.Genre);
                     var movie = _bestMoviesDBContext.Movies.Find(id);
                     movie.Title = movieEditModel.Title;
                     movie.Genre = genre;
-                    movie.ReleaseDate = movieEditModel.ReleaseDate;
+                    movie.ReleaseDate = (DateTime)movieEditModel.ReleaseDate;
                     movie.NumberInStock = movieEditModel.NumberInStock;
 
                     _bestMoviesDBContext.Entry(movie).State = EntityState.Modified;
                     _bestMoviesDBContext.SaveChanges();
+
+                    return RedirectToAction("Index");
                 }
-                
-                return RedirectToAction("Index");
             }
             catch
             {
@@ -136,6 +156,12 @@ namespace BestMovies.Controllers
             {
                 return View();
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _bestMoviesDBContext.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
